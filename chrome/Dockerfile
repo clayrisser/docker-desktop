@@ -1,12 +1,12 @@
-# File: /sway/Makefile
-# Project: ci-images
-# File Created: 06-10-2021 14:23:56
+# File: /chrome/Dockerfile
+# Project: x11docker-images
+# File Created: 12-02-2023 12:12:35
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 12-02-2023 12:09:29
+# Last Modified: 12-02-2023 12:17:29
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
-# Risser Labs LLC (c) Copyright 2021
+# Risser Labs LLC (c) Copyright 2021 - 2023
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,22 +20,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include ../mkpm.mk
-ifneq (,$(MKPM_READY))
-include $(MKPM)/gnu
-include $(PROJECT_ROOT)/shared.mk
+FROM registry.gitlab.com/risserlabs/community/docker-sway/base:latest
 
-export NAME ?= sway
-export VERSION ?= 0.0.1
+RUN apt-get install -y \
+    flatpak
 
-include $(MKPM)/docker
+USER admin
 
-.PHONY: vnc
-vnc:
-	@$(DOCKER) run -it --rm \
-		--user admin \
-        -p 5910:5910 \
-        -p 7023:7023 \
-		registry.gitlab.com/risserlabs/community/docker-sway/sway:latest
+RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+RUN flatpak install flathub com.github.Eloston.UngoogledChromium
 
-endif
+USER root

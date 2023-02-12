@@ -1,9 +1,9 @@
-# File: /Makefile
+# File: /base/Makefile
 # Project: ci-images
-# File Created: 15-08-2021 02:20:14
+# File Created: 06-10-2021 14:23:56
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 12-02-2023 12:13:45
+# Last Modified: 12-02-2023 12:22:48
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021
@@ -20,42 +20,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include mkpm.mk
+include ../mkpm.mk
 ifneq (,$(MKPM_READY))
-include shared.mk
+include $(MKPM)/gnu
+include $(PROJECT_ROOT)/shared.mk
 
-IMAGES = \
-	base \
-	chrome
+export NAME ?= base
+export VERSION ?= 0.0.1
 
-.PHONY: build
-build: | $(patsubst %,%/build,$(IMAGES))
+include $(MKPM)/docker
 
-.PHONY: push
-push: | $(patsubst %,%/push,$(IMAGES))
-
-.PHONY: pull
-pull: | $(patsubst %,%/pull,$(IMAGES))
-
-%/build:
-	@$(MAKE) -sC $* build ARGS=$(ARGS)
-
-%/pull:
-	@$(MAKE) -sC $* pull ARGS=$(ARGS)
-
-%/push:
-	@$(MAKE) -sC $* push ARGS=$(ARGS)
-
-%/up:
-	@$(MAKE) -sC $* up ARGS=$(ARGS)
-
-%/shell:
-	@$(MAKE) -sC $* shell ARGS=$(ARGS)
-
-%/desktop:
-	@$(MAKE) -sC $* desktop ARGS=$(ARGS)
-
-%/vnc:
-	@$(MAKE) -sC $* vnc ARGS=$(ARGS)
+.PHONY: vnc
+vnc:
+	@$(DOCKER) run -it --rm \
+		--user admin \
+        -p 5910:5910 \
+        -p 7023:7023 \
+		registry.gitlab.com/risserlabs/community/docker-sway/base:latest
 
 endif
