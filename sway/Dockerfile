@@ -1,9 +1,9 @@
-# File: /swayvnc/Dockerfile
-# Project: x11docker-images
+# File: /sway/Dockerfile
+# Project: docker-sway
 # File Created: 11-02-2023 13:12:34
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 12-02-2023 11:07:59
+# Last Modified: 12-02-2023 12:09:28
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -46,7 +46,6 @@ RUN echo $LANG UTF-8 > /etc/locale.gen && \
 
 ENV USER="admin"
 RUN addgroup $USER && adduser --ingroup $USER $USER
-RUN mkdir -p /home/$USER/.config/wayvnc
 RUN openssl req -x509 -newkey rsa:4096 -sha256 -days 999999 -nodes \
     -keyout key.pem -out cert.pem -subj /CN=localhost \
     -addext subjectAltName=DNS:localhost,DNS:localhost,IP:127.0.0.1
@@ -58,6 +57,7 @@ COPY xinitrc /xinitrc
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 
-ENV VNC_ADDRESS="0.0.0.0" \
-    VNC_ENABLE_AUTH="false" \
-    VNC_PASSWORD="P@ssw0rd"
+ENV VNC=true \
+    VNC_ENABLE_AUTH=false \
+    VNC_PASSWORD="P@ssw0rd" \
+    VNC_ADDRESS="0.0.0.0"

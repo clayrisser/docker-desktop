@@ -3,7 +3,7 @@
 # File Created: 15-04-2022 06:16:26
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 11-02-2023 12:20:31
+# Last Modified: 12-02-2023 12:09:29
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2022
@@ -20,12 +20,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export REGISTRY ?= registry.gitlab.com/risserlabs/community/x11docker-images
+export REGISTRY ?= registry.gitlab.com/risserlabs/community/docker-sway
 export DOCKER_FLAVOR ?= docker
 
 export X11DOCKER ?= x11docker
 
-ARGS ?= --wayland --desktop
+DESKTOP_ARGS := $(ARGS)
+ifneq (,$(WAYLAND_DISPLAY))
+DESKTOP_ARGS += --weston
+endif
+
 .PHONY: desktop
 desktop:
-	@$(X11DOCKER) $(ARGS) $(IMAGE)
+	@$(X11DOCKER) $(DESKTOP_ARGS) $(IMAGE)

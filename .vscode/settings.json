@@ -7,6 +7,7 @@
     "psql",
     "risser",
     "risserlabs",
+    "wayvnc",
     "yaml"
   ],
   "psi-header.variables": [["projectCreationYear", "2021"]],

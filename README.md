@@ -1,3 +1,6 @@
-# x11docker-images
+# docker-sway
 
-> docker images for x11docker
+> docker images for sway window manager
+
+- compatible with [x11docker](https://github.com/mviereck/x11docker)
+- contains the [wayvnc](https://github.com/any1/wayvnc) server

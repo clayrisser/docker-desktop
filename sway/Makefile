@@ -3,7 +3,7 @@
 # File Created: 06-10-2021 14:23:56
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 12-02-2023 11:11:04
+# Last Modified: 12-02-2023 12:09:29
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021
@@ -25,7 +25,7 @@ ifneq (,$(MKPM_READY))
 include $(MKPM)/gnu
 include $(PROJECT_ROOT)/shared.mk
 
-export NAME ?= swayvnc
+export NAME ?= sway
 export VERSION ?= 0.0.1
 
 include $(MKPM)/docker
@@ -36,10 +36,6 @@ vnc:
 		--user admin \
         -p 5910:5910 \
         -p 7023:7023 \
-		-e XDG_RUNTIME_DIR=/tmp \
-        -e WLR_BACKENDS=headless \
-        -e WLR_LIBINPUT_NO_DEVICES=1 \
-        -e SWAYSOCK=/tmp/sway-ipc.sock \
-		registry.gitlab.com/risserlabs/community/x11docker-images/sway:latest
+		registry.gitlab.com/risserlabs/community/docker-sway/sway:latest
 
 endif

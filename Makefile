@@ -3,7 +3,7 @@
 # File Created: 15-08-2021 02:20:14
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 12-02-2023 11:10:09
+# Last Modified: 12-02-2023 11:23:33
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021
@@ -25,8 +25,6 @@ ifneq (,$(MKPM_READY))
 include shared.mk
 
 IMAGES = \
-	base \
-	slim \
 	sway
 
 .PHONY: build

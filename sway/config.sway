@@ -218,4 +218,4 @@ bindsym $mod+r mode "resize"
 
 include /etc/sway/config.d/*
 
-exec wayvnc 0.0.0.0 5910
+exec sh -c "[ \"$WLR_BACKENDS\" = \"headless\" ] && [ \"$VNC\" != \"false\" ] && wayvnc 0.0.0.0 5910 || true"
