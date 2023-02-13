@@ -3,7 +3,7 @@
 # File Created: 15-08-2021 02:20:14
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 12-02-2023 12:13:45
+# Last Modified: 13-02-2023 02:02:50
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021
@@ -26,6 +26,7 @@ include shared.mk
 
 IMAGES = \
 	base \
+	slim \
 	chrome
 
 .PHONY: build

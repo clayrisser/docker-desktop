@@ -1,9 +1,9 @@
-# File: /base/Dockerfile
+# File: /slim/Dockerfile
 # Project: docker-sway
 # File Created: 11-02-2023 13:12:34
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 13-02-2023 10:43:18
+# Last Modified: 13-02-2023 10:37:59
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -20,28 +20,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM debian:sid
+FROM debian:sid-slim
 
 ENV LANG=en_US.UTF-8 \
     USER=admin
 
 COPY entrypoint.sh /usr/local/bin/entrypoint
-
 RUN echo $LANG UTF-8 > /etc/locale.gen && \
     export DEBIAN_FRONTEND=noninteractive && apt-get update && \
-    apt-get install -y --no-install-recommends \
-    x11-xserver-utils \
-    xauth \
-    xinit && \
     apt-get install -y \
     dbus-x11 \
-    libxv1 \
     locales \
-    mesa-utils \
-    mesa-utils-extra \
     openssl \
-    procps \
-    psmisc \
     sway \
     wayvnc \
     xwayland && \
@@ -54,7 +44,6 @@ RUN echo $LANG UTF-8 > /etc/locale.gen && \
     -addext subjectAltName=DNS:localhost,DNS:localhost,IP:127.0.0.1
 
 COPY config.sway /etc/sway/config
-COPY xinitrc /xinitrc
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 

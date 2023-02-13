@@ -3,7 +3,7 @@
 # File Created: 06-10-2021 14:23:56
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 12-02-2023 12:13:10
+# Last Modified: 13-02-2023 02:16:43
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021
@@ -29,13 +29,5 @@ export NAME ?= chrome
 export VERSION ?= 0.0.1
 
 include $(MKPM)/docker
-
-.PHONY: vnc
-vnc:
-	@$(DOCKER) run -it --rm \
-		--user admin \
-        -p 5910:5910 \
-        -p 7023:7023 \
-		registry.gitlab.com/risserlabs/community/docker-sway/chrome:latest
 
 endif

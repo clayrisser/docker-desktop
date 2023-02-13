@@ -1,12 +1,12 @@
-# File: /shared.mk
-# Project: images
-# File Created: 15-04-2022 06:16:26
+# File: /slim/Makefile
+# Project: ci-images
+# File Created: 06-10-2021 14:23:56
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 13-02-2023 02:16:33
+# Last Modified: 13-02-2023 02:16:20
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
-# Risser Labs LLC (c) Copyright 2021 - 2022
+# Risser Labs LLC (c) Copyright 2021
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,24 +20,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export REGISTRY ?= registry.gitlab.com/risserlabs/community/docker-sway
-export DOCKER_FLAVOR ?= docker
+include ../mkpm.mk
+ifneq (,$(MKPM_READY))
+include $(MKPM)/gnu
+include $(PROJECT_ROOT)/shared.mk
 
-export X11DOCKER ?= x11docker
+export NAME ?= slim
+export VERSION ?= 0.0.1
 
-DESKTOP_ARGS := $(ARGS)
-ifneq (,$(WAYLAND_DISPLAY))
-DESKTOP_ARGS += --weston
+include $(MKPM)/docker
+
 endif
-
-.PHONY: desktop
-desktop:
-	@$(X11DOCKER) $(DESKTOP_ARGS) $(IMAGE)
-
-.PHONY: vnc
-vnc:
-	@$(DOCKER) run -it --rm \
-		--user admin \
-        -p 5910:5910 \
-        -p 7023:7023 \
-		$(IMAGE)

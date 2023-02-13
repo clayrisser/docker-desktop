@@ -3,7 +3,7 @@
 # File Created: 12-02-2023 12:12:35
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 12-02-2023 12:17:29
+# Last Modified: 13-02-2023 10:53:28
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -20,14 +20,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM registry.gitlab.com/risserlabs/community/docker-sway/base:latest
+FROM debian
 
-RUN apt-get install -y \
-    flatpak
+WORKDIR /tmp
 
-USER admin
+RUN apt-get update && apt-get install -y \
+    devscripts \
+    git \
+    equivs
 
-RUN flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-RUN flatpak install flathub com.github.Eloston.UngoogledChromium
+RUN git clone https://github.com/ungoogled-software/ungoogled-chromium-debian.git
+WORKDIR /tmp/ungoogled-chromium-debian
+RUN git submodule update --init --recursive
+RUN debian/rules setup && \
+    mk-build-deps --install \
+    --tool='apt-get -o Debug::pkgProblemResolver=yes --no-install-recommends --yes' \
+    debian/control && \
+    rm ungoogled-chromium-build-deps_*
+RUN dpkg-buildpackage -b -uc
 
-USER root
+# FROM registry.gitlab.com/risserlabs/community/docker-sway/slim:0.0.1
