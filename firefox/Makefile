@@ -1,9 +1,9 @@
-# File: /Makefile
+# File: /firefox/Makefile
 # Project: ci-images
-# File Created: 15-08-2021 02:20:14
+# File Created: 06-10-2021 14:23:56
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 14-02-2023 12:45:50
+# Last Modified: 14-02-2023 12:36:28
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021
@@ -20,48 +20,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include mkpm.mk
+include ../mkpm.mk
 ifneq (,$(MKPM_READY))
-include shared.mk
+include $(MKPM)/gnu
+include $(PROJECT_ROOT)/shared.mk
 
-IMAGES = \
-	base \
-	slim \
-	chrome \
-	firefox \
-	ui.vision
+export NAME ?= firefox
+export VERSION ?= 0.0.1
 
-.PHONY: build
-build: | $(patsubst %,%/build,$(IMAGES))
-
-.PHONY: push
-push: | $(patsubst %,%/push,$(IMAGES))
-
-.PHONY: pull
-pull: | $(patsubst %,%/pull,$(IMAGES))
-
-%/build:
-	@$(MAKE) -sC $* build ARGS=$(ARGS)
-
-%/pull:
-	@$(MAKE) -sC $* pull ARGS=$(ARGS)
-
-%/push:
-	@$(MAKE) -sC $* push ARGS=$(ARGS)
-
-%/up:
-	@$(MAKE) -sC $* up ARGS=$(ARGS)
-
-%/shell:
-	@$(MAKE) -sC $* shell ARGS=$(ARGS)
-
-%/desktop:
-	@$(MAKE) -sC $* desktop ARGS=$(ARGS)
-
-%/vnc:
-	@$(MAKE) -sC $* vnc ARGS=$(ARGS)
-
-%/commit:
-	@$(MAKE) -sC $* commit ARGS=$(ARGS)
+include $(MKPM)/docker
 
 endif

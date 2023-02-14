@@ -1,9 +1,9 @@
-# File: /chrome/Dockerfile
+# File: /firefox/Dockerfile
 # Project: docker-sway
 # File Created: 12-02-2023 12:12:35
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 14-02-2023 12:35:32
+# Last Modified: 14-02-2023 12:36:59
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -24,14 +24,6 @@ FROM registry.gitlab.com/risserlabs/community/docker-sway/slim:0.0.1
 
 ENV CHROME_VERSION=110.0.5481.77
 
-RUN curl -LO https://github.com/berkley4/ungoogled-chromium-debian/releases/download/${CHROME_VERSION}-1/ungoogled-chromium_${CHROME_VERSION}-1_amd64.deb && \
-    curl -LO http://ftp.de.debian.org/debian/pool/main/f/flac/libflac8_1.3.3-2+deb11u1_amd64.deb && \
-    curl -LO http://ftp.de.debian.org/debian/pool/main/t/tiff/libtiff5_4.2.0-1+deb11u1_amd64.deb && \
-    curl -LO http://ftp.de.debian.org/debian/pool/main/libw/libwebp/libwebp6_0.6.1-2.1_amd64.deb && \
-    apt-get update && \
-    apt-get install ./*.deb || true && \
-    apt-get install -f && \
-    apt-get install -y ./*.deb && \
-    rm -rf ./*.deb && \
-    rm -rf /var/lib/apt/lists/* && \
-    sed -i 's|Exec=/usr/bin/chromium|Exec=/usr/bin/chromium --no-sandbox|g' /usr/share/applications/chromium.desktop
+RUN apt-get update && \
+    apt-get install -y firefox && \
+    rm -rf /var/lib/apt/lists/*

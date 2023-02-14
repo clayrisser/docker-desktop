@@ -1,12 +1,12 @@
-# File: /shared.mk
-# Project: images
-# File Created: 15-04-2022 06:16:26
+# File: /ui.vision/Dockerfile
+# Project: docker-sway
+# File Created: 12-02-2023 12:12:35
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 14-02-2023 12:38:12
+# Last Modified: 14-02-2023 12:41:25
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
-# Risser Labs LLC (c) Copyright 2021 - 2022
+# Risser Labs LLC (c) Copyright 2021 - 2023
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,25 +20,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export REGISTRY ?= registry.gitlab.com/risserlabs/community/docker-sway
-export DOCKER_FLAVOR ?= docker
-
-export X11DOCKER ?= x11docker
-
-DESKTOP_ARGS := $(ARGS)
-ifneq (,$(WAYLAND_DISPLAY))
-DESKTOP_ARGS += --weston
-endif
-
-.PHONY: desktop
-desktop:
-	@$(X11DOCKER) $(DESKTOP_ARGS) $(IMAGE)
-
-.PHONY: vnc
-vnc:
-	@$(DOCKER) run -it --rm \
-		--privileged \
-		--user admin \
-        -p 5910:5910 \
-        -p 7023:7023 \
-		$(IMAGE) foot -H echo Hello, world!
+FROM registry.gitlab.com/risserlabs/community/docker-sway/firefox:0.0.1

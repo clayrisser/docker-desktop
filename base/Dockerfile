@@ -3,7 +3,7 @@
 # File Created: 11-02-2023 13:12:34
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 13-02-2023 10:43:18
+# Last Modified: 14-02-2023 11:08:40
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -34,7 +34,9 @@ RUN echo $LANG UTF-8 > /etc/locale.gen && \
     xauth \
     xinit && \
     apt-get install -y \
+    curl \
     dbus-x11 \
+    j4-dmenu-desktop \
     libxv1 \
     locales \
     mesa-utils \
@@ -55,6 +57,8 @@ RUN echo $LANG UTF-8 > /etc/locale.gen && \
 
 COPY config.sway /etc/sway/config
 COPY xinitrc /xinitrc
+
+WORKDIR /home/$USER
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 

@@ -3,7 +3,7 @@
 # File Created: 11-02-2023 13:12:34
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 13-02-2023 10:37:59
+# Last Modified: 14-02-2023 12:24:22
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -29,7 +29,9 @@ COPY entrypoint.sh /usr/local/bin/entrypoint
 RUN echo $LANG UTF-8 > /etc/locale.gen && \
     export DEBIAN_FRONTEND=noninteractive && apt-get update && \
     apt-get install -y \
+    curl \
     dbus-x11 \
+    j4-dmenu-desktop \
     locales \
     openssl \
     sway \
@@ -44,6 +46,8 @@ RUN echo $LANG UTF-8 > /etc/locale.gen && \
     -addext subjectAltName=DNS:localhost,DNS:localhost,IP:127.0.0.1
 
 COPY config.sway /etc/sway/config
+
+WORKDIR /home/$USER
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 

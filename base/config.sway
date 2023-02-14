@@ -18,7 +18,7 @@ set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu dmenu_path | j4-dmenu-desktop | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
@@ -218,5 +218,5 @@ bindsym $mod+r mode "resize"
 
 include /etc/sway/config.d/*
 
-exec sh -c "[ \"$WLR_BACKENDS\" = \"headless\" ] && [ \"$VNC\" != \"false\" ] && wayvnc 0.0.0.0 5910 || true"
+exec sh -c "[ \"$VNC\" != \"false\" ] && wayvnc 0.0.0.0 5910 || true"
 exec sh -c "$DOCKER_CMD"
