@@ -3,7 +3,7 @@
 # File Created: 15-04-2022 06:16:26
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 15-02-2023 04:39:03
+# Last Modified: 15-02-2023 08:13:33
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2022
@@ -37,8 +37,6 @@ desktop:
 .PHONY: vnc
 vnc:
 	@$(DOCKER) run -it --rm \
-		--privileged \
-		--user admin \
         -p 5910:5910 \
         -p 7023:7023 \
-		$(IMAGE) foot -H echo Hello, world!
+		$(IMAGE)

@@ -6,6 +6,8 @@ export WLR_BACKENDS="headless"
 export WLR_LIBINPUT_NO_DEVICES=1
 export XDG_RUNTIME_DIR="/tmp"
 mkdir -p $HOME/.config/wayvnc
+touch /home/$USER/docker.log
+tail -f /home/$USER/docker.log 2>/dev/null &
 printf "
 address=$VNC_ADDRESS
 enable_auth=$VNC_ENABLE_AUTH

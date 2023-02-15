@@ -3,7 +3,7 @@
 # File Created: 11-02-2023 13:12:34
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 15-02-2023 04:39:03
+# Last Modified: 15-02-2023 05:26:25
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -61,6 +61,8 @@ COPY xinitrc /xinitrc
 WORKDIR /home/$USER
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
+
+USER $USER
 
 ENV RESOLUTION="1600x900" \
     VNC=true \

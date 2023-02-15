@@ -3,7 +3,7 @@
 # File Created: 12-02-2023 12:12:35
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 15-02-2023 04:39:03
+# Last Modified: 15-02-2023 06:44:19
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -21,7 +21,3 @@
 # limitations under the License.
 
 FROM registry.gitlab.com/risserlabs/community/docker-desktop/firefox:0.0.1
-
-RUN apt-get update && \
-    apt-get install -y fuse && \
-    rm -rf /var/lib/apt/lists/*

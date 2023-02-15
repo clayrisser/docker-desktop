@@ -3,7 +3,7 @@
 # File Created: 06-10-2021 14:23:56
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 14-02-2023 14:24:53
+# Last Modified: 15-02-2023 08:18:35
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021
@@ -32,13 +32,12 @@ include $(MKPM)/docker
 
 CONTAINER ?= $(shell $(DOCKER) ps | $(GREP) $(NAME) | $(HEAD) -n1 | $(CUT) -d' ' -f1)
 
-.PHONY: commit
-commit:
-	@[ "$(CONTAINER)" != "" ] && ( \
-		$(DOCKER) commit $(CONTAINER) ${IMAGE}:latest && \
-		$(DOCKER) tag ${IMAGE}:${TAG} ${IMAGE}:${MAJOR} && \
-		$(DOCKER) tag ${IMAGE}:${TAG} ${IMAGE}:${MAJOR}.${MINOR} && \
-		$(DOCKER) tag ${IMAGE}:${TAG} ${IMAGE}:${MAJOR}.${MINOR}.${PATCH} \
-	) || echo "No container to commit"
+.PHONY: test
+test:
+	@$(DOCKER) run -it --rm \
+		-v $(PROJECT_ROOT)/ui.vision/uivision:/home/admin/uivision \
+        -p 5910:5910 \
+        -p 7023:7023 \
+		$(IMAGE) cat_photo
 
 endif

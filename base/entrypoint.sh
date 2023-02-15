@@ -2,6 +2,9 @@
 
 export DOCKER_CMD="$@"
 
+touch /home/$USER/docker.log
+tail -f /home/$USER/docker.log 2>/dev/null &
+
 if [ "$container" != "" ]; then # duck type checking for x11docker
     cp /xinitrc $HOME/.xinitrc
     echo "exec \"sway\"" >> $HOME/.xinitrc

@@ -1,0 +1,36 @@
+{
+  "Name": "cat_photo",
+  "CreationDate": "2023-2-15",
+  "Commands": [
+    {
+      "Command": "open",
+      "Target": "https://www.google.com/",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "name=q",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "type",
+      "Target": "name=q",
+      "Value": "cat",
+      "Description": ""
+    },
+    {
+      "Command": "clickAndWait",
+      "Target": "name=btnK",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "captureEntirePageScreenshot",
+      "Target": "cat",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}

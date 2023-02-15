@@ -3,7 +3,7 @@
 # File Created: 15-08-2021 02:20:14
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 14-02-2023 13:53:56
+# Last Modified: 15-02-2023 08:14:15
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021
@@ -63,5 +63,8 @@ pull: | $(patsubst %,%/pull,$(IMAGES))
 
 %/commit:
 	@$(MAKE) -sC $* commit ARGS=$(ARGS)
+
+%/test:
+	@$(MAKE) -sC $* test ARGS=$(ARGS)
 
 endif
