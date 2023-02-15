@@ -3,7 +3,7 @@
 # File Created: 12-02-2023 12:12:35
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 15-02-2023 08:22:32
+# Last Modified: 15-02-2023 09:10:03
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -24,15 +24,17 @@ FROM registry.gitlab.com/risserlabs/community/docker-desktop/ui-vision-base:0.0.
 
 USER root
 
-COPY uivision.sh /usr/local/bin/uivision
+COPY uivision-entrypoint.sh /usr/local/bin/uivision-entrypoint
 COPY uivision-tail.sh /usr/local/bin/uivision-tail
+COPY uivision.sh /usr/local/bin/uivision
 
 RUN apt-get update && apt-get install -y \
     inotify-tools && \
     rm -rf /var/lib/apt/lists/* && \
     echo 'exec sh -c "uivision-tail /home/$USER/uivision/logs >> /home/$USER/docker.log"' >> /etc/sway/config && \
-    sed -i 's|$DOCKER_CMD|sleep 5 && uivision $DOCKER_CMD|g' /etc/sway/config && \
+    sed -i 's|sh -c "$DOCKER_CMD"|uivision-entrypoint|g' /etc/sway/config && \
     chmod +x /usr/local/bin/uivision && \
+    chmod +x /usr/local/bin/uivision-entrypoint && \
     chmod +x /usr/local/bin/uivision-tail
 
 USER admin
