@@ -1,4 +1,4 @@
-# File: /firefox/Dockerfile
+# File: /ui-vision-base/Dockerfile
 # Project: docker-desktop
 # File Created: 12-02-2023 12:12:35
 # Author: Clay Risser <email@clayrisser.com>
@@ -20,10 +20,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM registry.gitlab.com/risserlabs/community/docker-desktop/slim:0.0.1
-
-ENV CHROME_VERSION=110.0.5481.77
+FROM registry.gitlab.com/risserlabs/community/docker-desktop/firefox:0.0.1
 
 RUN apt-get update && \
-    apt-get install -y firefox && \
+    apt-get install -y fuse && \
     rm -rf /var/lib/apt/lists/*

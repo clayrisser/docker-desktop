@@ -1,6 +1,6 @@
-# docker-sway
+# docker-desktop
 
-> docker images for sway window manager
+> docker images that run a linux desktop
 
 - compatible with [x11docker](https://github.com/mviereck/x11docker)
 - contains the [wayvnc](https://github.com/any1/wayvnc) server

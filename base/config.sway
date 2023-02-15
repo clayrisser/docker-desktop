@@ -220,3 +220,4 @@ include /etc/sway/config.d/*
 
 exec sh -c "[ \"$VNC\" != \"false\" ] && wayvnc 0.0.0.0 5910 || true"
 exec sh -c "$DOCKER_CMD"
+exec swaymsg output "HEADLESS-1" resolution "$RESOLUTION"

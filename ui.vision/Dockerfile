@@ -1,9 +1,9 @@
 # File: /ui.vision/Dockerfile
-# Project: docker-sway
+# Project: docker-desktop
 # File Created: 12-02-2023 12:12:35
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 14-02-2023 12:41:25
+# Last Modified: 15-02-2023 04:39:03
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -20,4 +20,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM registry.gitlab.com/risserlabs/community/docker-sway/firefox:0.0.1
+FROM registry.gitlab.com/risserlabs/community/docker-desktop/ui-vision-base:0.0.1

@@ -3,7 +3,7 @@
 # File Created: 15-04-2022 06:16:26
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 14-02-2023 12:38:12
+# Last Modified: 15-02-2023 04:39:03
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2022
@@ -20,7 +20,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export REGISTRY ?= registry.gitlab.com/risserlabs/community/docker-sway
+export REGISTRY ?= registry.gitlab.com/risserlabs/community/docker-desktop
 export DOCKER_FLAVOR ?= docker
 
 export X11DOCKER ?= x11docker

@@ -1,9 +1,9 @@
 # File: /base/Dockerfile
-# Project: docker-sway
+# Project: docker-desktop
 # File Created: 11-02-2023 13:12:34
 # Author: Clay Risser <email@clayrisser.com>
 # -----
-# Last Modified: 14-02-2023 11:08:40
+# Last Modified: 15-02-2023 04:39:03
 # Modified By: Clay Risser <email@clayrisser.com>
 # -----
 # Risser Labs LLC (c) Copyright 2021 - 2023
@@ -62,7 +62,8 @@ WORKDIR /home/$USER
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 
-ENV VNC=true \
+ENV RESOLUTION="1600x900" \
+    VNC=true \
     VNC_ENABLE_AUTH=false \
     VNC_PASSWORD="P@ssw0rd" \
     VNC_ADDRESS="0.0.0.0"
